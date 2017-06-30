@@ -4,14 +4,11 @@
 #include <linux/module.h>	/* Needed by all modules */
 #include <linux/kernel.h>	/* Needed for KERN_INFO */
 
-#define MSR_TM_LG       32              /* Trans Mem Available */                                                                                
-#define MSR_TM          __MASK(MSR_TM_LG)       /* Transactional Mem Available */                                                                
-
 void msr_tm_enable(void){
 	asm (
 			"mfmsr   4 \n ;"
-			"li      3, 1 \n;"
-			"sldi    3, 3, 32 \n;"
+			"li      3, 1 \n;"  	// MSR_TM is at 32th position
+			"sldi    3, 3, 32 \n;"  // 1 << 32
 			"or      4, 4, 3 \n;"
 			"mtmsrd  4 \n;"
 			:
