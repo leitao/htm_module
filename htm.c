@@ -22,10 +22,9 @@ void msr_tm_enable(void){
 
 int init_module(void)
 {
-	printk(KERN_INFO "Hello world 1.\n");
+	printk(KERN_INFO "HTM in kernel sapce.\n");
 	
 	msr_tm_enable();
-
 
 	asm goto (
 		"li  0, 22 ;\n"
